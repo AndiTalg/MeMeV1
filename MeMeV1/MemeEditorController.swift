@@ -14,6 +14,8 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var txtBottom: UITextField!
     
     @IBOutlet weak var imgMeme: UIImageView!
+    @IBOutlet weak var tlbMemeEditor: UIToolbar!
+    
     
     @IBOutlet weak var btnShare: UIBarButtonItem!
     @IBOutlet weak var btnCancel: UIBarButtonItem!
@@ -48,44 +50,16 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true;
+    // Activity dialogue
+    @IBAction func launchActivity(sender: UIBarButtonItem) {
+        let memedImage = createMemedImage()
+        
+        let activityController = UIActivityViewController (activityItems: [memedImage], applicationActivities: nil)
+        
+        self.presentViewController(activityController, animated: true, completion: nil)
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        textField.text = ""
-        return true;
-    }
-    
-    // Used to set (or reset) default values for MeMeV1 Editor
-    func setDefaults() {
-        
-        let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : -3.0,
-        ]
-        
-        txtTop.defaultTextAttributes = memeTextAttributes
-        txtTop.textAlignment = .Center
-        txtTop.text = "TOP"
-        
-        
-        txtBottom.defaultTextAttributes = memeTextAttributes
-        txtBottom.textAlignment = .Center
-        txtBottom.text = "BOTTOM"
-        
-        // Set button status
-        btnShare.enabled = false // No image selected -> no sharing
-        
-        // Reset image
-        self.imgMeme.image = nil
-        
-    }
     
     // Imagepicker (Album)
     @IBAction func pickImage(sender: AnyObject) {
@@ -109,7 +83,17 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     
-    // Keyboard
+    // Keyboard and textfields
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true;
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        textField.text = ""
+        return true;
+    }
+    
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
@@ -136,7 +120,56 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.CGRectValue().height
     }
-
+    
+    // Create memed image by overlaying image with text
+    func createMemedImage() -> UIImage {
+        
+        // Hide toolbar and navbar
+        tlbMemeEditor.hidden = true
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame,
+            afterScreenUpdates: true)
+        let memedImage : UIImage =
+        UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // Show toolbar and navbar
+        tlbMemeEditor.hidden = false
+        //self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        return memedImage
+    }
+    
+    // Used to set (or reset) default values for MeMeV1 Editor
+    func setDefaults() {
+        
+        // Define default text attributes (
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName : -3.0,
+        ]
+        
+        // Set textFields to defaults
+        txtTop.defaultTextAttributes = memeTextAttributes
+        txtTop.textAlignment = .Center
+        txtTop.text = "TOP"
+        
+        txtBottom.defaultTextAttributes = memeTextAttributes
+        txtBottom.textAlignment = .Center
+        txtBottom.text = "BOTTOM"
+        
+        // Set button status
+        btnShare.enabled = false // No image selected -> no sharing
+        
+        // Reset image
+        self.imgMeme.image = nil
+        
+    }
 
 }
 
