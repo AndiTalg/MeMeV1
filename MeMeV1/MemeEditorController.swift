@@ -26,6 +26,11 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         txtTop.delegate = self
         txtBottom.delegate = self
         
+        // Disable camera button if no camera available
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            btnCamera.enabled = false
+        }
+        
         setDefaults()
     }
     
@@ -74,10 +79,15 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         txtBottom.textAlignment = .Center
         txtBottom.text = "BOTTOM"
         
+        // Set button status
+        btnShare.enabled = false // No image selected -> no sharing
+        
+        // Reset image
+        self.imgMeme.image = nil
+        
     }
     
-    // Imagepicker
-    
+    // Imagepicker (Album)
     @IBAction func pickImage(sender: AnyObject) {
         let ctrlPicker = UIImagePickerController()
         ctrlPicker.delegate = self
@@ -85,17 +95,21 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         self.presentViewController(ctrlPicker, animated: true, completion: nil)
     }
   
+    @IBAction func cancelEdit(sender: UIBarButtonItem) {
+        
+       setDefaults()
+    }
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         self.dismissViewControllerAnimated(true, completion: nil)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imgMeme.image = image
-            btnShare.enabled = true
+            btnShare.enabled = true // Now it is possible to share
         }
-        
     }
     
     
-    // Keyboard functions
+    // Keyboard
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)

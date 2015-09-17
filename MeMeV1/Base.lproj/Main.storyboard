@@ -22,7 +22,11 @@
                                 <items>
                                     <navigationItem title="Meme Editor" id="vLZ-sg-ONV">
                                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="Yzh-3K-Ci2"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="9ct-Ok-isZ"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="9ct-Ok-isZ">
+                                            <connections>
+                                                <action selector="cancelEdit:" destination="vXZ-lx-hvc" id="qHX-RF-dpP"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
