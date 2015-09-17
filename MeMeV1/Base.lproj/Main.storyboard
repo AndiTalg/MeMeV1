@@ -20,7 +20,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZr-AE-ZIg">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="vLZ-sg-ONV">
+                                    <navigationItem title="Meme Editor" id="vLZ-sg-ONV">
                                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="Yzh-3K-Ci2"/>
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="9ct-Ok-isZ"/>
                                     </navigationItem>
