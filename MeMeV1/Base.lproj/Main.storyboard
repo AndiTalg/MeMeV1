@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Editor Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MeMeV1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MemeEditorController" customModule="MeMeV1" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -38,12 +38,12 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h59-mE-paq">
-                                <rect key="frame" x="0.0" y="94" width="600" height="27"/>
+                                <rect key="frame" x="0.0" y="84" width="600" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bottom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="If9-9V-mXr">
-                                <rect key="frame" x="0.0" y="499" width="600" height="27"/>
+                                <rect key="frame" x="0.0" y="509" width="600" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
@@ -53,14 +53,14 @@
                             <constraint firstItem="vZr-AE-ZIg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="12W-zr-6gi"/>
                             <constraint firstItem="sLb-k1-yOA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="3OV-Ca-KOF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MQV-iC-dhu" secondAttribute="trailing" constant="-16" id="8LU-dA-D9U"/>
-                            <constraint firstItem="MQV-iC-dhu" firstAttribute="top" secondItem="If9-9V-mXr" secondAttribute="bottom" constant="30" id="Dod-iC-05U"/>
+                            <constraint firstItem="MQV-iC-dhu" firstAttribute="top" secondItem="If9-9V-mXr" secondAttribute="bottom" constant="20" id="Dod-iC-05U"/>
                             <constraint firstItem="vZr-AE-ZIg" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="FLX-ar-IR1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="h59-mE-paq" secondAttribute="trailing" constant="-16" id="Gli-sf-wyt"/>
                             <constraint firstItem="h59-mE-paq" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="N4B-Ju-Zp0"/>
                             <constraint firstItem="sLb-k1-yOA" firstAttribute="top" secondItem="vZr-AE-ZIg" secondAttribute="bottom" id="UDG-fj-0ps"/>
                             <constraint firstAttribute="trailingMargin" secondItem="If9-9V-mXr" secondAttribute="trailing" constant="-16" id="Vaa-c6-Koa"/>
                             <constraint firstItem="MQV-iC-dhu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="VeS-Oh-hdj"/>
-                            <constraint firstItem="h59-mE-paq" firstAttribute="top" secondItem="vZr-AE-ZIg" secondAttribute="bottom" constant="30" id="X8g-89-Ls5"/>
+                            <constraint firstItem="h59-mE-paq" firstAttribute="top" secondItem="vZr-AE-ZIg" secondAttribute="bottom" constant="20" id="X8g-89-Ls5"/>
                             <constraint firstItem="If9-9V-mXr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="ZO3-9N-UAy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sLb-k1-yOA" secondAttribute="trailing" constant="-16" id="bWx-dZ-LTb"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="MQV-iC-dhu" secondAttribute="bottom" id="ldS-K4-k0W"/>
