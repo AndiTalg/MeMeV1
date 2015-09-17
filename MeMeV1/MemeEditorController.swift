@@ -10,14 +10,21 @@ import UIKit
 
 class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    @IBOutlet weak var topTextField: UITextField!
-    @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var txtTop: UITextField!
+    @IBOutlet weak var txtBottom: UITextField!
+    
+    @IBOutlet weak var imgMeme: UIImageView!
+    
+    @IBOutlet weak var btnShare: UIBarButtonItem!
+    @IBOutlet weak var btnCancel: UIBarButtonItem!
+    @IBOutlet weak var btnCamera: UIBarButtonItem!
+    @IBOutlet weak var btnAlbum: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+        txtTop.delegate = self
+        txtBottom.delegate = self
         
         setDefaults()
     }
@@ -36,7 +43,7 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -58,14 +65,32 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
             NSStrokeWidthAttributeName : -3.0,
         ]
         
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = .Center
-        topTextField.text = "TOP"
+        txtTop.defaultTextAttributes = memeTextAttributes
+        txtTop.textAlignment = .Center
+        txtTop.text = "TOP"
         
         
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .Center
-        bottomTextField.text = "BOTTOM"
+        txtBottom.defaultTextAttributes = memeTextAttributes
+        txtBottom.textAlignment = .Center
+        txtBottom.text = "BOTTOM"
+        
+    }
+    
+    // Imagepicker
+    
+    @IBAction func pickImage(sender: AnyObject) {
+        let ctrlPicker = UIImagePickerController()
+        ctrlPicker.delegate = self
+        ctrlPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(ctrlPicker, animated: true, completion: nil)
+    }
+  
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.imgMeme.image = image
+            btnShare.enabled = true
+        }
         
     }
     
@@ -81,13 +106,13 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        if bottomTextField.isFirstResponder() {
+        if txtBottom.isFirstResponder() {
             self.view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if bottomTextField.isFirstResponder() {
+        if txtBottom.isFirstResponder() {
             self.view.frame.origin.y += getKeyboardHeight(notification)
         }
     }

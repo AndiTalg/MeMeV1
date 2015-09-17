@@ -34,7 +34,11 @@
                                 <items>
                                     <barButtonItem systemItem="camera" id="dnN-99-kVo"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dCV-zR-sZn"/>
-                                    <barButtonItem title="Album" id="fVJ-cR-80b"/>
+                                    <barButtonItem title="Album" id="fVJ-cR-80b">
+                                        <connections>
+                                            <action selector="pickImage:" destination="vXZ-lx-hvc" id="BlL-NT-MBs"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h59-mE-paq">
@@ -69,8 +73,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomTextField" destination="If9-9V-mXr" id="PSj-cA-3z9"/>
-                        <outlet property="topTextField" destination="h59-mE-paq" id="i7T-pv-5Aa"/>
+                        <outlet property="btnAlbum" destination="fVJ-cR-80b" id="ahs-kh-Eg8"/>
+                        <outlet property="btnCamera" destination="dnN-99-kVo" id="QJ3-mG-l06"/>
+                        <outlet property="btnCancel" destination="9ct-Ok-isZ" id="gac-rd-FPv"/>
+                        <outlet property="btnShare" destination="Yzh-3K-Ci2" id="VW3-yA-yjW"/>
+                        <outlet property="imgMeme" destination="sLb-k1-yOA" id="34T-hQ-jiJ"/>
+                        <outlet property="txtBottom" destination="If9-9V-mXr" id="4VC-Sa-XTJ"/>
+                        <outlet property="txtTop" destination="h59-mE-paq" id="s81-yb-TBy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
