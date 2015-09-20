@@ -14,6 +14,7 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var txtBottom: UITextField!
     
     @IBOutlet weak var imgMeme: UIImageView!
+    @IBOutlet weak var nvbMemeEditor: UINavigationBar!
     @IBOutlet weak var tlbMemeEditor: UIToolbar!
     
     
@@ -21,6 +22,8 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var btnCancel: UIBarButtonItem!
     @IBOutlet weak var btnCamera: UIBarButtonItem!
     @IBOutlet weak var btnAlbum: UIBarButtonItem!
+    
+    var tempMeme : Meme?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +54,34 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
+    // Cancel button
+    @IBAction func cancelEdit(sender: UIBarButtonItem) {
+        
+        setDefaults()
+    }
+    
     // Activity dialogue
     @IBAction func launchActivity(sender: UIBarButtonItem) {
-        let memedImage = createMemedImage()
         
-        let activityController = UIActivityViewController (activityItems: [memedImage], applicationActivities: nil)
+        let myImage = createMemedImage()
+        
+        let activityController = UIActivityViewController (activityItems: [myImage], applicationActivities: nil)
+        activityController.completionWithItemsHandler = {(activity, success, items, error) in
+            self.save(myImage)
+            activityController.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
         
         self.presentViewController(activityController, animated: true, completion: nil)
     }
     
+    // Imagepicker (Camera)
+    @IBAction func pickImageCamera(sender: UIBarButtonItem) {
+        let ctrlPicker = UIImagePickerController()
+        ctrlPicker.delegate = self
+        ctrlPicker.sourceType = UIImagePickerControllerSourceType.Camera
+        self.presentViewController(ctrlPicker, animated: true, completion: nil)
+    }
     
     // Imagepicker (Album)
     @IBAction func pickImage(sender: AnyObject) {
@@ -67,11 +89,6 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         ctrlPicker.delegate = self
         ctrlPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.presentViewController(ctrlPicker, animated: true, completion: nil)
-    }
-  
-    @IBAction func cancelEdit(sender: UIBarButtonItem) {
-        
-       setDefaults()
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
@@ -82,6 +99,9 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // Keyboard and textfields
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -90,7 +110,11 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        textField.text = ""
+        
+        // Clear textfield only if it contains still the default texts
+        if textField.text == "TOP" || textField.text == "BOTTOM" {
+            textField.text = ""
+        }
         return true;
     }
     
@@ -124,9 +148,9 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     // Create memed image by overlaying image with text
     func createMemedImage() -> UIImage {
         
-        // Hide toolbar and navbar
+        // Hide toolbar and navbar (should not be in created image)
         tlbMemeEditor.hidden = true
-        //self.navigationController?.setNavigationBarHidden(true, animated: false)
+        nvbMemeEditor.hidden = true
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -136,9 +160,9 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // Show toolbar and navbar
+        // Show toolbar and navbar again
         tlbMemeEditor.hidden = false
-        //self.navigationController?.setNavigationBarHidden(false, animated: false)
+        nvbMemeEditor.hidden = false
         
         return memedImage
     }
@@ -170,6 +194,13 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         self.imgMeme.image = nil
         
     }
+    
+    // Save Meme (at this stage no "real" saving)
+    func save(memedImage:UIImage) {
+        println("Test")
+        var meme = Meme(topText: txtTop.text!, bottomText: txtBottom.text!, originalImage: imgMeme.image!, memedImage: memedImage)
+    }
+    
 
 }
 
