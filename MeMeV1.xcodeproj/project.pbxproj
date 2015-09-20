@@ -81,11 +81,11 @@
 			children = (
 				877BB28C1B98624600433009 /* AppDelegate.swift */,
 				877BB28E1B98624600433009 /* MemeEditorController.swift */,
+				877BB3081BAEEFEA00433009 /* Meme.swift */,
 				877BB2901B98624600433009 /* Main.storyboard */,
 				877BB2931B98624600433009 /* Images.xcassets */,
 				877BB2951B98624600433009 /* LaunchScreen.xib */,
 				877BB28A1B98624600433009 /* Supporting Files */,
-				877BB3081BAEEFEA00433009 /* Meme.swift */,
 			);
 			path = MeMeV1;
 			sourceTree = "<group>";
@@ -164,6 +164,7 @@
 				TargetAttributes = {
 					877BB2861B98624600433009 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = FXKUK7249L;
 					};
 					877BB29B1B98624600433009 = {
 						CreatedOnToolsVersion = 6.4;
@@ -344,9 +345,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MeMeV1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -354,9 +359,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MeMeV1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

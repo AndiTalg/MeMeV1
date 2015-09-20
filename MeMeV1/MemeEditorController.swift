@@ -23,8 +23,6 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var btnCamera: UIBarButtonItem!
     @IBOutlet weak var btnAlbum: UIBarButtonItem!
     
-    var tempMeme : Meme?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -197,7 +195,6 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     
     // Save Meme (at this stage no "real" saving)
     func save(memedImage:UIImage) {
-        println("Test")
         var meme = Meme(topText: txtTop.text!, bottomText: txtBottom.text!, originalImage: imgMeme.image!, memedImage: memedImage)
     }
     

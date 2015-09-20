@@ -40,7 +40,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQV-iC-dhu">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="camera" id="dnN-99-kVo"/>
+                                    <barButtonItem systemItem="camera" id="dnN-99-kVo">
+                                        <connections>
+                                            <action selector="pickImageCamera:" destination="vXZ-lx-hvc" id="zva-9K-ugP"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dCV-zR-sZn"/>
                                     <barButtonItem title="Album" id="fVJ-cR-80b">
                                         <connections>
